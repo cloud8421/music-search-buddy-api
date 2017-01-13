@@ -1,0 +1,22 @@
+---
+- hosts: api
+  become: yes
+  tasks:
+    - name: rate limit ssh connections
+      ufw:
+        rule: limit
+        port: ssh
+    - name: allow ssl connections
+      ufw:
+        rule: allow
+        port: 443
+        proto: tcp
+    - name: allow normal connections (only redirect)
+      ufw:
+        rule: allow
+        port: 80
+        proto: tcp
+    - name: block all connections
+      ufw:
+        state: enabled
+        policy: reject

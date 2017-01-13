@@ -1,0 +1,32 @@
+---
+- hosts: api
+  become: yes
+  roles:
+    - role: antoiner77.caddy
+      caddy_update: yes
+      caddy_features: cors%2Cgit
+      caddy_config: |
+        ms-api.fullyforged.com
+
+        tls tools@fullyforged.com
+
+        cors /spotify/search {
+          origin http://localhost:8000 https://ms.fullyforged.com
+          max_age 0
+          methods GET
+        }
+
+        cors /apple-music/search {
+          origin http://localhost:8000 https://ms.fullyforged.com
+          max_age 0
+          methods GET
+        }
+
+        proxy /spotify/search https://api.spotify.com/v1/search {
+          without /spotify/search
+        }
+
+        proxy /apple-music/search https://itunes.apple.com/search {
+          without /apple-music/search
+        }
+
