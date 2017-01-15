@@ -4,7 +4,7 @@
   roles:
     - role: antoiner77.caddy
       caddy_update: yes
-      caddy_features: cors%2Cgit
+      caddy_features: cors%2Cratelimit
       caddy_config: |
         ms-api.fullyforged.com
 
@@ -24,3 +24,4 @@
           without /search/apple-music
         }
 
+        ratelimit /search 5 6 second
