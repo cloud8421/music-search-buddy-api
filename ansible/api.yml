@@ -10,23 +10,17 @@
 
         tls tools@fullyforged.com
 
-        cors /spotify/search {
+        cors /search {
           origin http://localhost:8000 https://ms.fullyforged.com
           max_age 0
           methods GET
         }
 
-        cors /apple-music/search {
-          origin http://localhost:8000 https://ms.fullyforged.com
-          max_age 0
-          methods GET
+        proxy /search/spotify https://api.spotify.com/v1/search {
+          without /search/spotify
         }
 
-        proxy /spotify/search https://api.spotify.com/v1/search {
-          without /spotify/search
-        }
-
-        proxy /apple-music/search https://itunes.apple.com/search {
-          without /apple-music/search
+        proxy /search/apple-music https://itunes.apple.com/search {
+          without /search/apple-music
         }
 
