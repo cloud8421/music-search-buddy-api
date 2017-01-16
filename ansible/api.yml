@@ -11,8 +11,7 @@
         tls tools@fullyforged.com
 
         cors /search {
-          origin http://localhost:8000 https://ms.fullyforged.com
-          max_age 0
+          origin *
           methods GET
         }
 
