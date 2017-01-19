@@ -15,12 +15,25 @@
           methods GET
         }
 
+        cors /lookup {
+          origin *
+          methods GET
+        }
+
         proxy /search/spotify https://api.spotify.com/v1/search {
           without /search/spotify
         }
 
         proxy /search/apple-music https://itunes.apple.com/search {
           without /search/apple-music
+        }
+
+        proxy /lookup/spotify https://api.spotify.com/v1/albums {
+          without /lookup/spotify
+        }
+
+        proxy /lookup/apple-music https://itunes.apple.com/lookup {
+          without /lookup/apple-music
         }
 
         ratelimit /search 5 6 second
